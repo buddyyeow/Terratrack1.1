@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mesilau Trail Map</title>
+  <title>Terratrack</title>
   <style>
     body {
       margin: 0;
@@ -58,10 +58,10 @@
 </head>
 <body>
   <div class="map-container">
-    <!-- Replace this image with your own trail map -->
+    <!-- Corrected image path -->
     <img src="images/mesilau-map.png" alt="Mesilau Trail Map" />
 
-    <!-- Dots: adjust position (% top/left) to fit your map layout -->
+    <!-- Dots at checkpoints -->
     <div class="dot" style="top: 85%; left: 50%;" data-km="0.85"></div>
     <div class="dot" style="top: 60%; left: 52%;" data-km="1.7"></div>
     <div class="dot" style="top: 35%; left: 49%;" data-km="2.55"></div>
@@ -69,35 +69,34 @@
   </div>
 
   <div class="info" id="info">Click your starting point.</div>
-
-  <div class="footer">Mesilau Trail Distance Selector &copy; 2025</div>
+  <div class="footer">Mesilau Trail &copy; 2025</div>
 
   <script>
-    const dots = document.querySelectorAll(".dot");
+    const dots = document.querySelectorAll(\".dot\");
     let start = null;
     let end = null;
-    const info = document.getElementById("info");
+    const info = document.getElementById(\"info\");
 
     dots.forEach(dot => {
-      dot.addEventListener("click", () => {
+      dot.addEventListener(\"click\", () => {
         const km = parseFloat(dot.dataset.km);
 
         if (!start) {
           start = km;
-          dot.classList.add("selected");
+          dot.classList.add(\"selected\");
           info.textContent = `Start set at ${start} km. Now select your destination.`;
         } else if (!end && km !== start) {
           end = km;
-          dot.classList.add("selected");
+          dot.classList.add(\"selected\");
           const distance = Math.abs(end - start).toFixed(2);
           const estimatedMinutes = Math.round((65 / 3.4) * distance);
           info.textContent = `From ${start} km to ${end} km → ${distance} km ≈ ${estimatedMinutes} minutes.`;
         } else {
           // Reset
-          dots.forEach(d => d.classList.remove("selected"));
+          dots.forEach(d => d.classList.remove(\"selected\"));
           start = km;
           end = null;
-          dot.classList.add("selected");
+          dot.classList.add(\"selected\");
           info.textContent = `Start reset to ${start} km. Now select your destination.`;
         }
       });
@@ -105,4 +104,3 @@
   </script>
 </body>
 </html>
-
